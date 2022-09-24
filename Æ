@@ -1,0 +1,16 @@
+void opcontrol() {
+    pros::Motor left_wheels (LEFT_WHEELS_PORT);
+    pros::Motor right_wheels (RIGHT_WHEELS_PORT, true);
+    pros::Controller master (CONTROLLER_MASTER);
+
+    while (true) {
+        int power = master.get_analog(ANALOG_LEFT_Y);
+        int turn = master.get_analog(ANALOG_RIGHT_X);
+        int right = power + turn;
+        int left = power - turn;
+        left_wheels.move(left);
+        right_wheels.move(right);
+
+        pros::delay(3);
+    }
+}
